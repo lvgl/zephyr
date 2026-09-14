@@ -30,39 +30,6 @@ if(CONFIG_LVGL)
     ${LVGL_DIR}/src/*.c
   )
 
-  set(LVGL_EXCLUDE_PATTERNS
-      "${LVGL_DIR}/src/osal/lv_cmsis_rtos2.c"
-      "${LVGL_DIR}/src/osal/lv_freertos.c"
-      "${LVGL_DIR}/src/osal/lv_linux.c"
-      "${LVGL_DIR}/src/osal/lv_mqx.c"
-      "${LVGL_DIR}/src/osal/lv_os_none.c"
-      "${LVGL_DIR}/src/osal/lv_pthread.c"
-      "${LVGL_DIR}/src/osal/lv_rtthread.c"
-      "${LVGL_DIR}/src/osal/lv_sdl2.c"
-      "${LVGL_DIR}/src/osal/lv_windows.c"
-
-      "${LVGL_DIR}/src/drivers/*"
-
-      # Remove libs/gltf since this leads to build warnings
-      "${LVGL_DIR}/src/libs/gltf/*"
-
-      "${LVGL_DIR}/src/stdlib/builtin/lv_mem_core_builtin.c"
-      "${LVGL_DIR}/src/stdlib/builtin/lv_sprintf_builtin.c"
-      "${LVGL_DIR}/src/stdlib/builtin/lv_string_builtin.c"
-      "${LVGL_DIR}/src/stdlib/clib/lv_mem_core_clib.c"
-
-      "${LVGL_DIR}/src/stdlib/rtthread/*"
-      "${LVGL_DIR}/src/stdlib/micropython/*"
-      "${LVGL_DIR}/src/stdlib/uefi/*"
-
-      "${LVGL_DIR}/src/debugging/test/*"
-  )
-
-  foreach(pattern IN LISTS LVGL_EXCLUDE_PATTERNS)
-    file(GLOB_RECURSE LVGL_EXCLUDED CONFIGURE_DEPENDS ${pattern})
-    list(REMOVE_ITEM LVGL_SRC_FILES ${LVGL_EXCLUDED})
-  endforeach()
-
   zephyr_library_sources(${LVGL_SRC_FILES})
 
   if(CONFIG_LV_USE_THORVG_INTERNAL)
