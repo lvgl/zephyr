@@ -13,6 +13,11 @@ if(CONFIG_LVGL)
   zephyr_library()
 
   zephyr_include_directories(${LVGL_DIR}/src/)
+
+  if(CONFIG_LV_USE_DRAW_PXP)
+    zephyr_include_directories(${ZEPHYR_HAL_NXP_MODULE_DIR}/mcux/mcux-sdk-ng/drivers/pxp)
+    zephyr_library_sources(${ZEPHYR_HAL_NXP_MODULE_DIR}/mcux/mcux-sdk-ng/drivers/pxp/fsl_pxp.c)
+  endif()
   zephyr_include_directories(include)
 
   add_subdirectory_ifdef(CONFIG_LV_USE_NEMA_GFX nemagfx)
