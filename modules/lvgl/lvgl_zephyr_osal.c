@@ -171,8 +171,6 @@ void lv_sleep_ms(uint32_t ms)
 	k_msleep(ms);
 }
 
-#endif /* CONFIG_LV_Z_USE_OSAL */
-
 uint32_t lv_os_get_idle_percent(void)
 {
 #ifdef CONFIG_CPU_LOAD
@@ -189,3 +187,5 @@ uint32_t lv_os_get_idle_percent(void)
 	return 0;
 #endif
 }
+
+#endif /* CONFIG_LV_Z_USE_OSAL */
