@@ -22,37 +22,44 @@ tests:
   sample.modules.lvgl.demo_music:
     platform_allow:
       - native_sim
+      - native_sim/native/64
     extra_configs:
       - CONFIG_LV_Z_DEMO_MUSIC=y
   sample.modules.lvgl.demo_benchmark:
     platform_allow:
       - native_sim
+      - native_sim/native/64
     extra_configs:
       - CONFIG_LV_Z_DEMO_BENCHMARK=y
       - CONFIG_LV_USE_DEMO_WIDGETS=y
   sample.modules.lvgl.demo_stress:
     platform_allow:
       - native_sim
+      - native_sim/native/64
     extra_configs:
       - CONFIG_LV_Z_DEMO_STRESS=y
   sample.modules.lvgl.demo_widgets:
     platform_allow:
       - native_sim
+      - native_sim/native/64
     extra_configs:
       - CONFIG_LV_Z_DEMO_WIDGETS=y
   sample.modules.lvgl.demo_keypad_encoder:
     platform_allow:
       - native_sim
+      - native_sim/native/64
     extra_configs:
       - CONFIG_LV_Z_DEMO_KEYPAD_AND_ENCODER=y
   sample.modules.lvgl.demo_render:
     platform_allow:
       - native_sim
+      - native_sim/native/64
     extra_configs:
       - CONFIG_LV_Z_DEMO_RENDER=y
   sample.modules.lvgl.demo_benchmark.lvgl_auto:
     platform_allow:
       - native_sim
+      - native_sim/native/64
     extra_configs:
       - CONFIG_LV_Z_DEMO_BENCHMARK=y
       - CONFIG_LV_USE_DEMO_WIDGETS=y
