@@ -27,15 +27,15 @@ config LV_Z_FULL_REFRESH
 config LV_Z_BITS_PER_PIXEL
 	default 16
 
-config LV_DPI_DEF
+configdefault LV_Z_DPI_DEF
 	default 128
 
 # Use offloaded render thread
 config LV_Z_FLUSH_THREAD
 	default y
 
-choice LV_COLOR_DEPTH
-	default LV_COLOR_DEPTH_16
+choice LV_Z_COLOR_FORMAT
+	default LV_Z_COLOR_FORMAT_RGB565
 endchoice
 
 # Force display buffers to be aligned to cache line size (32 bytes)
