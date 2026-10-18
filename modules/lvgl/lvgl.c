@@ -46,6 +46,11 @@ struct lvgl_disp_data disp_data[DT_ZEPHYR_DISPLAYS_COUNT] = {{
 		     "LVGL display " #n " is not a display controller node");
 FOR_EACH(DISPLAY_NODE_CLASS_ASSERT, (), LV_DISPLAYS_IDX_LIST)
 
+/* Map LV_COLOR_FORMAT_DEFAULT to the native format, because LVGL 9.5 doesn't have it yet */
+#if (LVGL_VERSION_MAJOR == 9) && (LVGL_VERSION_MINOR < 6) && !defined(LV_COLOR_FORMAT_DEFAULT)
+#define LV_COLOR_FORMAT_DEFAULT LV_COLOR_FORMAT_NATIVE
+#endif
+
 #if CONFIG_LV_Z_BITS_PER_PIXEL != 0
 #define BUFFER_BITS_PER_PIXEL CONFIG_LV_Z_BITS_PER_PIXEL
 #else
