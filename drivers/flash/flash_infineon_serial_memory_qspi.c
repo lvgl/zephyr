@@ -13,7 +13,15 @@
 #define SOC_NV_FLASH_NODE DT_MEM_FROM_MAPPED_PARTITION(DT_INST(0, zephyr_mapped_partition))
 #endif
 
-#define PAGE_LEN DT_PROP(SOC_NV_FLASH_NODE, erase_block_size)
+/*
+ * Take the size and the page layout from the first soc-nv-flash child of the controller, because
+ * the first mapped partition in the devicetree can be in another memory (RRAM on PSE84), which
+ * gives LittleFS no pages for a partition in the external flash.
+ */
+#define IFX_QSPI_FLASH_NODE                                                                        \
+	GET_ARG_N(1, DT_INST_FOREACH_CHILD_STATUS_OKAY_SEP(0, SOC_NV_FLASH_COMPAT_NODE, (,)))
+
+#define PAGE_LEN DT_PROP(IFX_QSPI_FLASH_NODE, erase_block_size)
 
 #include <zephyr/kernel.h>
 #include <zephyr/devicetree.h>
@@ -22,6 +30,7 @@
 #include <zephyr/logging/log.h>
 
 #include <infineon_kconfig.h>
+#include "flash_priv.h"
 #include "mtb_serial_memory.h"
 #include "cy_device_headers.h"
 
@@ -181,7 +190,7 @@ static int ifx_serial_memory_flash_erase(const struct device *dev, off_t offset,
 
 #if CONFIG_FLASH_PAGE_LAYOUT
 static const struct flash_pages_layout ifx_serial_memory_flash_pages_layout = {
-	.pages_count = DT_REG_SIZE(SOC_NV_FLASH_NODE) / PAGE_LEN,
+	.pages_count = DT_REG_SIZE(IFX_QSPI_FLASH_NODE) / PAGE_LEN,
 	.pages_size = PAGE_LEN,
 };
 
@@ -211,7 +220,7 @@ ifx_serial_memory_flash_get_parameters(const struct device *dev)
 static int ifx_serial_memory_flash_get_size(const struct device *dev, uint64_t *size)
 {
 	ARG_UNUSED(dev);
-	*size = DT_REG_SIZE(SOC_NV_FLASH_NODE);
+	*size = DT_REG_SIZE(IFX_QSPI_FLASH_NODE);
 	return 0;
 }
 
