@@ -25,6 +25,8 @@ manifest:
       url-base: https://github.com/BabbleSim
     - name: alif
       url-base: https://github.com/alifsemi
+    - name: lvgl
+      url-base: https://github.com/lvgl
 
   group-filter: [-babblesim, -optional]
 
@@ -303,8 +305,9 @@ manifest:
       revision: fb00b383072518c918e2258b0916c996f2d4eebe
       path: modules/lib/loramac-node
     - name: lvgl
-      revision: c9ffd4692de246eb911c7ba49b78a331b2c63c74
+      revision: 18ff2366f488cc0b9912073bd50816ab1ba4081a
       path: modules/lib/gui/lvgl
+      remote: lvgl
     - name: mbedtls
       revision: 4952e1328529ee549d412b498ea71c54f30aa3b1
       path: modules/crypto/mbedtls
